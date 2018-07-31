@@ -1,0 +1,44 @@
+<h2>Employee Detail</h2>
+
+<p>
+  <a [routerLink]='["/fetch-employee-create","0"]'>Add Employee</a>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Employee Name
+      </th>
+      <th>
+        Address
+      </th>
+      <th>
+        Mobile
+      </th>
+      <th>
+        Department Name
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let e of lstEmployee">
+      <td>
+        {{e.empName}}
+      </td>
+      <td>
+        {{e.address}}
+      </td>
+      <td>
+        {{e.mobile}}
+      </td>
+      <td>
+        {{e.depName}}
+      </td>
+      <td>
+        <a [routerLink]='["/fetch-employee-create",e.employeeId]' >Edit</a> |
+        <a (click)="deleteEmployee(e.employeeId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

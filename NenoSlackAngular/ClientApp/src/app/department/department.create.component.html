@@ -1,0 +1,25 @@
+<h4>{{btnName}} Department</h4>
+<hr />
+<div class="row">
+  <div class="col-md-4">
+    <form #form="ngForm"  name="myForm" novalidate>
+      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+      <input type="hidden" [(ngModel)]="department.departmentId" id="departmentId" name="departmentId" />
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input name="name" id="name" class="form-control cmpsl" [(ngModel)]="department.name" required/>
+      </div>
+      <div class="form-group">
+        <input type="submit" value='{{btnName}}' class="btn btn-default" (click)="create()" />
+      </div>
+    </form>
+  </div>
+</div>
+<!--onclick="return checkValidation();"
+onclick="return callAPI();"
+(click)="create()"-->
+{{form.prestine}}
+<!--Model : {{ department | json }}-->
+<div>
+  <a [routerLink]='["/fetch-department"]'>Back to List</a>
+</div>

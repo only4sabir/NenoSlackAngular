@@ -1,0 +1,36 @@
+
+<!--<script type="text/javascript">
+  header("Access-Control-Allow-Origin:*");
+  header('Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE, PUT');
+  header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With, X-CLIENT-ID, X-CLIENT-SECRET');
+  header('Access-Control-Allow-Credentials: true');
+</script>-->
+<h2>Deparment</h2>
+
+<p>
+  <a [routerLink]="['/fetch-department-create','0']">Add Department</a>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of lstDepartment" >
+      <td>
+        {{ d.name}}
+      </td>
+      <td>
+        <a [routerLink]="['/fetch-department-create',d.departmentId]">Edit</a> |
+        <a (click)="deleteDepartment(d.departmentId)" >Delete</a>
+        <!--<a [routerLink]="['/fetch-department-create',d.departmentId]">Details</a> |-->
+        <!--<a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
+  <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>-->
+      </td>
+    </tr>
+  </tbody>
+</table>

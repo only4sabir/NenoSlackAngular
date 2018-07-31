@@ -1,0 +1,35 @@
+<h4>{{btnName}} Employee</h4>
+<hr />
+<div class="row">
+  <div class="col-md-4">
+    <form #form="ngForm" name="myForm" novalidate>
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input name="name" id="name" class="form-control cmpsl" [(ngModel)]="employee.name" required />
+      </div>
+      <div class="form-group">
+        <label class="control-label">Address</label>
+        <input name="address" id="address" class="form-control cmpsl" [(ngModel)]="employee.address" required />
+      </div>
+      <div class="form-group">
+        <label class="control-label">Mobile</label>
+        <input name="mobile" id="mobile" class="form-control cmpsl Mobile" maxlength="10"  [(ngModel)]="employee.mobile" required />
+      </div>
+      <div class="form-group">
+        <label class="control-label">Department</label>
+        <select class="form-control cmpsl valid" data-val="true" id="departmentId" name="departmentId" [(ngModel)]="employee.departmentId">
+          <option value="" selected="selected">Select</option>
+          <option *ngFor="let d of lstDepartment" value="{{d.departmentId}}" >{{d.name}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="submit" value='{{btnName}}' class="btn btn-default" (click)="create()" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<div>
+  <a [routerLink]='["/fetch-employee"]'>Back to List</a>
+</div>
+

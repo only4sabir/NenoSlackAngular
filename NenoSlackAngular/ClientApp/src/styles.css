@@ -1,0 +1,4 @@
+/* You can add global styles to this file, and also import other style files */
+
+.txterror {  border: 1px solid red !important;}
+.w3-code {  margin: 10px;  width: auto;  background-color: #fff;  padding: 8px 12px;  border-left: 4px solid #4CAF50;  word-wrap: break-word;}
