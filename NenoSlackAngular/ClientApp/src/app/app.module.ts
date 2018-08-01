@@ -15,6 +15,7 @@ import { empty } from 'rxjs/Observer';
 import { Employee } from './Model/employee.model';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeCreateComponent } from './employee/employee.create.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EmployeeCreateComponent } from './employee/employee.create.component';
     DepartmentComponent,
     DepartmentCreateComponent,
     EmployeeComponent,
-    EmployeeCreateComponent
+    EmployeeCreateComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,6 +44,7 @@ import { EmployeeCreateComponent } from './employee/employee.create.component';
       { path: 'fetch-department-create/:id', component: DepartmentCreateComponent },
       { path: 'fetch-employee', component: EmployeeComponent },
       { path: 'fetch-employee-create/:id', component: EmployeeCreateComponent },
+      { path: 'chat', component: ChatComponent },
       { path: '**', component: FetchDataComponent }
     ])
   ],

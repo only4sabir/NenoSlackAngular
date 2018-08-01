@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NenoSlackAngular.Models;
+using System;
 
 namespace AngularTest
 {
@@ -23,6 +26,16 @@ namespace AngularTest
             //services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
             //                                                           .AllowAnyMethod()
             //                                                            .AllowAnyHeader()));
+            
+            services.AddDbContext<BloggingContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSignalR();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);//You can set Time   
+                options.Cookie.HttpOnly = true;
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
@@ -50,6 +63,7 @@ namespace AngularTest
                 app.UseHsts();
             }
 
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -72,6 +86,10 @@ namespace AngularTest
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+            });
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chatHub");
             });
         }
     }

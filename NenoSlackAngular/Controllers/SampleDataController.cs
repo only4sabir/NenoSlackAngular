@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NenoSlackAngular.Models;
+using Newtonsoft.Json;
 
 namespace AngularTest.Controllers
 {
@@ -17,6 +20,7 @@ namespace AngularTest.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            var s = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
             var rng = new Random();
             int count = 0;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

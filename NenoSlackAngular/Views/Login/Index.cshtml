@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = null;
+}
+@model NenoSlackAngular.Models.UserDetail
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NenoSlackAngular</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <div class="loginmain">
+        <div class="login">
+            <div class="imgcontainer">
+                <img src="images/logo.png" alt="Avatar" class="avatar">
+            </div>
+
+            <form asp-action="checkUser">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div>
+                    <label for="uname"><b>Username</b></label>
+                    <input asp-for="UserName" placeholder="Enter Username" class="form-control cmpsl" required />
+                    @*<input type="text" placeholder="Enter Username" name="uname" required>*@
+
+                    <label for="psw"><b>Password</b></label>
+                    <input asp-for="Password" type="password" placeholder="Enter Password" class="form-control cmpsl" required />
+                    @*<input type="password" placeholder="Enter Password" name="psw" required>*@
+
+                    @*<input type="submit" value="Login" class="btn btn-default" onclick="return checkValidation();" />*@
+                    <button type="submit">Login</button>
+                    @*<label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
