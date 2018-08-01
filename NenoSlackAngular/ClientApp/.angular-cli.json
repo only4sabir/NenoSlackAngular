@@ -15,12 +15,20 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        //"styles.css",
+        //"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "css/site.css",
+        "lib/bootstrap/dist/css/bootstrap.css",
+        "css/font-awesome.min.css"
       ],
       "scripts": [
-        "../src/app/scripts/jquery.min.js",
-        "../src/app/scripts/site.js"
+        //"../src/app/scripts/jquery.min.js",
+        //"../src/app/scripts/site.js",
+        "lib/jquery/dist/jquery.js",
+        "lib/bootstrap/dist/js/bootstrap.js",
+        "js/site.js",
+        "lib/signalr/signalr.js",
+        "js/chat.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
