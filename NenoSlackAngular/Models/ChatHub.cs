@@ -89,13 +89,13 @@ namespace NenoSlackAngular.Models
         }
     }
 
-    public class OnlineUser
-    {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public List<string> connectionIds { get; set; }
-        public string Img { get; set; }
-    }
+    //public class OnlineUser
+    //{
+    //    public int UserId { get; set; }
+    //    public string UserName { get; set; }
+    //    public List<string> connectionIds { get; set; }
+    //    public string Img { get; set; }
+    //}
     public class MyUserType
     {
         public string ConnectionId { get; set; }

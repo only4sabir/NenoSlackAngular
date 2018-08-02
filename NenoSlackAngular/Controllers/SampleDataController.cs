@@ -20,7 +20,7 @@ namespace AngularTest.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
-            var s = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
+            //var s = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
             var rng = new Random();
             int count = 0;
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

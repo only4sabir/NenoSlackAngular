@@ -26,7 +26,7 @@ namespace NenoSlackAngular.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> checkUser([Bind("UserName,Password")] UserDetail userDetail)
+        public IActionResult checkUser([Bind("UserName,Password")] UserDetail userDetail)
         {
             if (ModelState.IsValid)
             {

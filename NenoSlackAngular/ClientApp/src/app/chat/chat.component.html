@@ -1,44 +1,49 @@
-<h2>Employee Detail</h2>
+<div id="frame">
+  <div class="content">
+    <div class="contact-profile">
+      <div class="contact-profile">
+        <img src="images/user/{{ReceiverUser.img}}" alt="" />
+        <p>{{ReceiverUser.userName}}</p>
+      </div>
+      <div id="messagesList" class="messages">
+        <ul>
+          <li class="sent">
+            <img src="/images/user/{{ReceiverUser.img}}" alt="" />
+            <p>Hello, How are you</p>
+          </li>
+          <!--<li class="replies">
+            <img src="~/images/user/sabir.jpg" alt="" />
+            <p>When you're backed against the wall, break the god damn thing down.</p>
+          </li>-->
+        </ul>
+      </div>
+      <div class="message-input">
+        <div class="wrap">
+          <input type="hidden" id="txtConnectionId" value="s" />
+          <input type="text" id="messageInput" placeholder="Write your message..." />
+          <button class="submit" id="sendButton" onclick="sendMessage();">Send</button>
+        </div>
+      </div>
+      <!--<form #form="ngForm" name="myForm" novalidate>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" [(ngModel)]="ReceiverUser.userId" id="ReceiverUserId" name="ReceiverUserId" />
+        <div class="form-group">
+          <label class="control-label">{{ReceiverUser.userName}}</label>
+          <input name="name" id="name" class="form-control cmpsl" [(ngModel)]="ReceiverUser.userName" required />
+        </div>
+        <div class="form-group">
+          <input type="submit" value='Send' class="btn btn-default" (click)="send()" />
+        </div>
+      </form>-->
+    </div>
+  </div>
+</div>
 
-<p>
-  <a [routerLink]='["/fetch-employee-create","0"]'>Add Employee</a>
-</p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>
-        Employee Name
-      </th>
-      <th>
-        Address
-      </th>
-      <th>
-        Mobile
-      </th>
-      <th>
-        Department Name
-      </th>
-      <th></th>
-    </tr>
-  </thead>
-  <!--<tbody>
-    <tr *ngFor="let e of lstEmployee">
-      <td>
-        {{e.empName}}
-      </td>
-      <td>
-        {{e.address}}
-      </td>
-      <td>
-        {{e.mobile}}
-      </td>
-      <td>
-        {{e.depName}}
-      </td>
-      <td>
-        <a [routerLink]='["/fetch-employee-create",e.employeeId]'>Edit</a> |
-        <a (click)="deleteEmployee(e.employeeId)">Delete</a>
-      </td>
-    </tr>
-  </tbody>-->
-</table>
+<!--onclick="return checkValidation();"
+onclick="return callAPI();"
+(click)="create()"-->
+<!--{{form.prestine}}-->
+<!--Model : {{ department | json }}-->
+<!--<div>
+  <a [routerLink]='["/fetch-department"]'>Back to List</a>
+</div>-->

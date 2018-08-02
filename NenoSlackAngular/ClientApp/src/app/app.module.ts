@@ -45,6 +45,7 @@ import { ChatComponent } from './chat/chat.component';
       { path: 'fetch-employee', component: EmployeeComponent },
       { path: 'fetch-employee-create/:id', component: EmployeeCreateComponent },
       { path: 'chat', component: ChatComponent },
+      { path: 'chat/:userid', component: ChatComponent },
       { path: '**', component: FetchDataComponent }
     ])
   ],

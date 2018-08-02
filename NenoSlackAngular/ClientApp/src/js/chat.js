@@ -1,4 +1,4 @@
-﻿// The following sample code uses modern ECMAScript 6 features 
+// The following sample code uses modern ECMAScript 6 features 
 // that aren't supported in Internet Explorer 11.
 // To convert the sample for environments that do not support ECMAScript 6, 
 // such as Internet Explorer 11, use a transpiler such as 
@@ -6,6 +6,9 @@
 //
 // See Es5-chat.js for a Babel transpiled version of the following code:
 
+var UserId = 1;
+var UserName = 'sabir';
+var Img = 'sabir.jpg';
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();

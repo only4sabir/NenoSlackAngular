@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  public users: OnlineUser[];
+
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+    console.log(baseUrl);
+    http.get<OnlineUser[]>(baseUrl + 'api/UserAPI/GetAllUser').subscribe(result => {
+      console.log(result);
+      this.users = result;
+    }, error => console.error(error));
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -15,4 +26,10 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+}
+interface OnlineUser {
+  userId: number;
+  userName: string;
+  connectionIds: string[];
+  img: string;
 }

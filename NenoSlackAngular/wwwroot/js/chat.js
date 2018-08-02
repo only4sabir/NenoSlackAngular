@@ -5,7 +5,9 @@
 // Babel at http://babeljs.io/. 
 //
 // See Es5-chat.js for a Babel transpiled version of the following code:
-
+var UserId = 1;
+var UserName = 'sabir';
+var Img = 'sabir.jpg';
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
