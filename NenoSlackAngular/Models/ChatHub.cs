@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace NenoSlackAngular.Models
 {
@@ -14,6 +16,7 @@ namespace NenoSlackAngular.Models
         //private static List<string> users = new List<string>();
         private static List<OnlineUser> users = new List<OnlineUser>();
 
+        static HttpClient client = new HttpClient();
         public Task SendMessageToCaller(string message)
         {
             return Clients.Caller.SendAsync("ReceiveMessage", message);
@@ -93,9 +96,32 @@ namespace NenoSlackAngular.Models
             {
                 readConId.AddRange(c);
             }
-
+            ChatDetail objChat = new ChatDetail();
+            objChat.FromUserId = Convert.ToInt16(UserId);
+            objChat.ToUserId = Convert.ToInt16(ReceiverUserId);
+            objChat.UserId = Convert.ToInt16(ReceiverUserId);
+            objChat.Message = message;
+            objChat.CreatedOn = System.DateTime.Now;
+            if (users.Where(s => s.UserId == objChat.ToUserId).ToList().Count > 0)
+                objChat.IsRead = true;
+            else
+                objChat.IsRead = false;
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId; //;//.ToList<IReadOnlyList<string>>();
+            try
+            {
+                //HttpResponseMessage response = await client.PostAsync<ChatDetail>("api/ChatDetailAPI",objChat);
+                //response.EnsureSuccessStatusCode();
 
+                var json = JsonConvert.SerializeObject(objChat);
+
+                var stringContent = new StringContent(json, System.Text.UnicodeEncoding.UTF8, "application/json");
+
+                //var client = new HttpClient();
+                var response = await client.PostAsync("https://localhost:44314/api/ChatDetailAPI", stringContent);
+
+            }
+            catch(Exception e)
+            { }
             //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);
             await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", UserId, message, null);
 
