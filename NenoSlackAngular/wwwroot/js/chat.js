@@ -5,19 +5,20 @@
 // Babel at http://babeljs.io/. 
 //
 // See Es5-chat.js for a Babel transpiled version of the following code:
-var UserId = 1;
-var UserName = 'sabir';
-var Img = 'sabir.jpg';
+var UserId = $("#SenderUserId").val();
+var UserName = $("#SenderUserName").val();//'sabir';
+var Img = $("#SenderImg").val();//'sabir.jpg';
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-connection.on("ReceiveMessage", (user, message, senderId) => {
-    console.log(user);
+connection.on("ReceiveMessage", (UserId, message, senderId) => {
+    //UserId = $("#SenderUserId").val();
+    console.log(UserId);
     console.log(message);
     const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const encodedMsg = msg;//user + " says " + msg;
-    addMessage(senderId, msg);
+    addMessage(UserId,senderId, msg);
     //const li = document.createElement("li");
     //li.textContent = encodedMsg;
     //document.getElementById("messagesList").appendChild(li);
@@ -47,20 +48,22 @@ connection.start().then(res => {
 //    event.preventDefault();
 //});
 function sendMessage() {
+
+    UserId = $("#SenderUserId").val();
     const user = "";// document.getElementById("userInput").value;
     const message = document.getElementById("messageInput").value;
     if (message != '') {
-        connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
+        connection.invoke("SendMessage", UserId, message).catch(err => console.error(err.toString()));
         event.preventDefault();
     }
 }
-function addMessage(senderId, message) {
+function addMessage(UserId,senderId, message) {
     //message = $(".message-input input").val();
     //if ($.trim(message) == '') {
     //    return false;
     //}
     var msgStatus = 'replies';
-    if ($("#txtConnectionId").val() == senderId) {
+    if ($("#SenderUserId").val() == UserId) {
         msgStatus = 'sent';
     }
     console.log(senderId);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NenoSlackAngular.Models;
+using Newtonsoft.Json;
 
 namespace NenoSlackAngular.Controllers
 {
@@ -32,6 +33,15 @@ namespace NenoSlackAngular.Controllers
         public IEnumerable<OnlineUser> GetAllUser()
         {
             return _context.UserDetail.ToList().Select(s => new OnlineUser { UserId = s.UserId, UserName = s.UserName, Img = s.Img, connectionIds = new List<string>() });
+        }
+        [Route("api/UserAPI/GetLoginUser")]
+        [HttpGet]
+        public OnlineUser GetLoginUser()
+        {
+            if(HttpContext.Session.GetString("UseDetail") != null)
+                return JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
+            return null;
+            //return _context.UserDetail.ToList().Select(s => new OnlineUser { UserId = s.UserId, UserName = s.UserName, Img = s.Img, connectionIds = new List<string>() });
         }
         //[Route("api/UserAPI/{userid}/GetOnlineUser")]
         //[HttpGet]

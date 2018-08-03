@@ -11,37 +11,40 @@
     </div>
     <div class='clearfix'></div>
     <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
+      <input type="hidden" id="SenderUserId" value="0" [(ngModel)]="LoginUser.userId" />
+      <input type="hidden" id="SenderUserName" value="0" [(ngModel)]="LoginUser.userName" />
+      <input type="hidden" id="SenderImg" value="0" [(ngModel)]="LoginUser.img" />
       <ul class='nav navbar-nav'>
         <!--<li *ngFor="let user of users" [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/"]' (click)='collapse()'>
-            <span class='glyphicon glyphicon-user'></span>  {{user.userName}}
-          </a>
-        </li>-->
+      <a [routerLink]='["/"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-user'></span>  {{user.userName}}
+      </a>
+    </li>-->
         <li *ngFor="let user of users" [routerLinkActive]='["link-active"]'>
           <a [routerLink]="['/chat', user.userId]" (click)='collapse()'>
             <span class='glyphicon glyphicon-user'></span> {{user.userName}}
           </a>
         </li>
         <!--<li [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/counter"]' (click)='collapse()'>
-            <span class='glyphicon glyphicon-education'></span> Counter
-          </a>
-        </li>
-        <li [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-            <span class='glyphicon glyphicon-th-list'></span> Fetch data
-          </a>
-        </li>
-        <li [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/fetch-department"]' (click)='collapse()'>
-            <span class='glyphicon glyphicon-th-list'></span> Department
-          </a>
-        </li>
-        <li [routerLinkActive]='["link-active"]'>
-          <a [routerLink]='["/fetch-employee"]' (click)='collapse()'>
-            <span class='glyphicon glyphicon-th-list'></span> Employee
-          </a>
-        </li>-->
+      <a [routerLink]='["/counter"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-education'></span> Counter
+      </a>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+      </a>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a [routerLink]='["/fetch-department"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-th-list'></span> Department
+      </a>
+    </li>
+    <li [routerLinkActive]='["link-active"]'>
+      <a [routerLink]='["/fetch-employee"]' (click)='collapse()'>
+        <span class='glyphicon glyphicon-th-list'></span> Employee
+      </a>
+    </li>-->
       </ul>
     </div>
   </div>

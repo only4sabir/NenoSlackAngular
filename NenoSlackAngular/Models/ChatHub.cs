@@ -67,10 +67,10 @@ namespace NenoSlackAngular.Models
             var a = "";// Context.ConnectionId;
             return a.ToString();
         }
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string UserId, string message)
         {
             var senderId = Context.ConnectionId;
-            await Clients.All.SendAsync("ReceiveMessage", user, message, senderId);
+            await Clients.All.SendAsync("ReceiveMessage", UserId, message, senderId);
         }
         //public async Task SendMessage(string user, string message)
         //{

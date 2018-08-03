@@ -19,6 +19,7 @@
       </div>
       <div class="message-input">
         <div class="wrap">
+          <input type="hidden" id="ReceiverUserId" value=""  [(ngModel)]="ReceiverUser.userId" />
           <input type="hidden" id="txtConnectionId" value="s" />
           <input type="text" id="messageInput" placeholder="Write your message..." />
           <button class="submit" id="sendButton" onclick="sendMessage();">Send</button>

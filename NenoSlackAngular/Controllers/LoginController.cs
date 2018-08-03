@@ -43,7 +43,7 @@ namespace NenoSlackAngular.Controllers
                     HttpContext.Session.SetString("UseDetail", JsonConvert.SerializeObject(ouser));
                     int UserId = user.UserId;
                     HttpContext.Session.SetInt32("UserId", UserId);
-                    return Redirect("/chat");
+                    return Redirect("/");
                 }
             }
             return RedirectToAction(nameof(Index));
