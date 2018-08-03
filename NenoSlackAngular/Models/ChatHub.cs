@@ -19,7 +19,7 @@ namespace NenoSlackAngular.Models
             return Clients.Caller.SendAsync("ReceiveMessage", message);
         }
 
-        public Task ConnectUser(int userId, string UserName, string ImgName)
+        public async Task ConnectUser(int userId, string UserName, string ImgName)
         {
             if (users.Where(s => s.UserId == userId).ToList().Count > 0)
             {
@@ -35,30 +35,46 @@ namespace NenoSlackAngular.Models
                 currentUser.UserName = UserName;
                 currentUser.Img = ImgName;
             }
-            return null;
+            List<string> readConId = new List<string>();
+            var u = users.Select(s => s.connectionIds).ToList();
+            foreach (var c in u)
+            {
+                readConId.AddRange(c);
+            }
+
+            IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
+            string lstOnlineUserId = String.Join("#liReceiverUserId", users.Select(s => s.UserId));
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "", lstOnlineUserId);
+
+            //return null;
         }
 
         public Task SendMessageToGroups(string message)
         {
             List<string> groups = new List<string>() { "SignalR Users" };
-            return Clients.Groups(groups).SendAsync("ReceiveMessage", message);
+            return Clients.Groups(groups).SendAsync("ReceiveMessage", "", message, null);
         }
         public override async Task OnConnectedAsync()
         {
             //Int32 UserId = 0;// (Int32)_session.GetInt32("UserId");
             //users.Where(u=>u.UserId.Equals())
             //users.Where(s => s.UserId == UserId).First().connectionIds.Add("Sd");
+
             OnlineUser user = new OnlineUser();
             user.connectionIds = new List<string>();
             user.connectionIds.Add(Context.ConnectionId);
             users.Add(user);
+
             await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
             await base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception exception)
         {
             // users.Remove(Context.ConnectionId);
-
+            foreach (var u in users)
+            {
+                u.connectionIds.Remove(Context.ConnectionId);
+            }
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SignalR Users");
             await base.OnDisconnectedAsync(exception);
         }
@@ -67,10 +83,24 @@ namespace NenoSlackAngular.Models
             var a = "";// Context.ConnectionId;
             return a.ToString();
         }
-        public async Task SendMessage(string UserId, string message)
+        public async Task SendMessage(string UserId, string message, string ReceiverUserId)
         {
             var senderId = Context.ConnectionId;
-            await Clients.All.SendAsync("ReceiveMessage", UserId, message, senderId);
+            List<string> readConId = new List<string>();
+            //IReadOnlyList<string> lstConnectionId = users.Where(s => s.UserId == Convert.ToInt16(UserId) || s.UserId == Convert.ToInt16(ReceiverUserId)).ToList().Select(s => String.Join(',', s.connectionIds)).ToList();
+            var u = users.Where(s => s.UserId == Convert.ToInt16(UserId) || s.UserId == Convert.ToInt16(ReceiverUserId)).Select(s => s.connectionIds).ToList();
+            foreach (var c in u)
+            {
+                readConId.AddRange(c);
+            }
+
+            IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId; //;//.ToList<IReadOnlyList<string>>();
+                        
+            //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", UserId, message, null);
+
+            //var o = Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", name, message, senderId);
+            //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);
         }
         //public async Task SendMessage(string user, string message)
         //{

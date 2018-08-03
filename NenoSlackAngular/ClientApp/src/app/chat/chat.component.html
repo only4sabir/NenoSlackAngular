@@ -7,11 +7,11 @@
       </div>
       <div id="messagesList" class="messages">
         <ul>
-          <li class="sent">
+           <!--<li class="sent">
             <img src="/images/user/{{ReceiverUser.img}}" alt="" />
             <p>Hello, How are you</p>
           </li>
-          <!--<li class="replies">
+          <li class="replies">
             <img src="~/images/user/sabir.jpg" alt="" />
             <p>When you're backed against the wall, break the god damn thing down.</p>
           </li>-->
@@ -19,9 +19,9 @@
       </div>
       <div class="message-input">
         <div class="wrap">
-          <input type="hidden" id="ReceiverUserId" value=""  [(ngModel)]="ReceiverUser.userId" />
+          <input type="hidden" id="ReceiverUserId" value="" [(ngModel)]="ReceiverUser.userId" />
           <input type="hidden" id="txtConnectionId" value="s" />
-          <input type="text" id="messageInput" placeholder="Write your message..." />
+          <input type="text" id="messageInput" placeholder="Write your message..." [(ngModel)]="msg" />
           <button class="submit" id="sendButton" onclick="sendMessage();">Send</button>
         </div>
       </div>

@@ -12,23 +12,41 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-connection.on("ReceiveMessage", (UserId, message, senderId) => {
+connection.on("ReceiveMessage", (UserId, message, lstOnlineUserId) => {
+
+    if (lstOnlineUserId != undefined && lstOnlineUserId != null) {
+        lstOnlineUserId = lstOnlineUserId.replace(/#/g, ',#');
+        lstOnlineUserId = "#liReceiverUserId" + lstOnlineUserId;
+        ///alert(lstOnlineUserId);
+        $(lstOnlineUserId).addClass('online');
+    }
+    else {
+        console.log(UserId);
+        console.log(message);
+        const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        const encodedMsg = msg;//user + " says " + msg;
+        addMessage(UserId, msg);
+    }
+
     //UserId = $("#SenderUserId").val();
-    console.log(UserId);
-    console.log(message);
-    const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    const encodedMsg = msg;//user + " says " + msg;
-    addMessage(UserId,senderId, msg);
+
     //const li = document.createElement("li");
     //li.textContent = encodedMsg;
     //document.getElementById("messagesList").appendChild(li);
+});
+$(document).ready(function () {
+    setTimeout(function () {
+        UserId = $("#SenderUserId").val();
+        UserName = $("#SenderUserName").val();//'sabir';
+        Img = $("#SenderImg").val();//'sabir.jpg';
+        connection.invoke("ConnectUser", UserId, UserName, Img).catch(err => console.error(err.toString()));
+    }, 500);
 });
 
 //console.log('satar');
 //connection.start().catch(err => console.error(err.toString()));
 
 connection.start().then(res => {
-    connection.invoke("ConnectUser", UserId, UserName, Img).catch(err => console.error(err.toString()));
     //connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
 }).catch(err => console.error(err.toString()));
 //console.log('end');
@@ -50,14 +68,15 @@ connection.start().then(res => {
 function sendMessage() {
 
     UserId = $("#SenderUserId").val();
-    const user = "";// document.getElementById("userInput").value;
+    var ReceiverUserId = $("#ReceiverUserId").val();
+    //const user = "";// document.getElementById("userInput").value;
     const message = document.getElementById("messageInput").value;
     if (message != '') {
-        connection.invoke("SendMessage", UserId, message).catch(err => console.error(err.toString()));
+        connection.invoke("SendMessage", UserId, message, ReceiverUserId).catch(err => console.error(err.toString()));
         event.preventDefault();
     }
 }
-function addMessage(UserId,senderId, message) {
+function addMessage(UserId, message) {
     //message = $(".message-input input").val();
     //if ($.trim(message) == '') {
     //    return false;
@@ -66,7 +85,7 @@ function addMessage(UserId,senderId, message) {
     if ($("#SenderUserId").val() == UserId) {
         msgStatus = 'sent';
     }
-    console.log(senderId);
+    //console.log(senderId);
     $('<li class="' + msgStatus + '"><img src="/images/user/sabir.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
     $('#messageInput').val(null);
     $('.contact.active .preview').html('<span>You: </span>' + message);

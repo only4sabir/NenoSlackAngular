@@ -20,8 +20,12 @@ export class NavMenuComponent {
 
     http.get<OnlineUser>(baseUrl + 'api/UserAPI/GetLoginUser').subscribe(result => {
       console.log(result);
+      if (result == null) {
+        window.location.href = "/Login";
+      }
       this.LoginUser = result;
     }, error => console.error(error));
+
   }
 
   collapse() {

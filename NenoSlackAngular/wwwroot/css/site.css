@@ -97,7 +97,7 @@ body {
     }
 }
 
-#frame #sidepanel {
+.frame #sidepanel {
     float: left;
     min-width: 280px;
     max-width: 340px;
@@ -110,19 +110,19 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel {
+    .frame #sidepanel {
         width: 58px;
         min-width: 58px;
     }
 }
 
-#frame #sidepanel #profile {
+#profile {
     width: 80%;
     margin: 25px auto;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile {
+    #profile {
         width: 100%;
         margin: 0 auto;
         padding: 5px 0 0 0;
@@ -130,16 +130,16 @@ body {
     }
 }
 
-#frame #sidepanel #profile.expanded .wrap {
+#profile.expanded .wrap {
     height: 210px;
     line-height: initial;
 }
 
-    #frame #sidepanel #profile.expanded .wrap p {
+    #profile.expanded .wrap p {
         margin-top: 20px;
     }
 
-    #frame #sidepanel #profile.expanded .wrap i.expand-button {
+    #profile.expanded .wrap i.expand-button {
         -moz-transform: scaleY(-1);
         -o-transform: scaleY(-1);
         -webkit-transform: scaleY(-1);
@@ -148,7 +148,7 @@ body {
         -ms-filter: "FlipH";
     }
 
-#frame #sidepanel #profile .wrap {
+#profile .wrap {
     height: 60px;
     line-height: 60px;
     overflow: hidden;
@@ -159,12 +159,12 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap {
+    #profile .wrap {
         height: 55px;
     }
 }
 
-#frame #sidepanel #profile .wrap img {
+#profile .wrap img {
     width: 50px;
     border-radius: 50%;
     padding: 3px;
@@ -179,40 +179,40 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap img {
+    #profile .wrap img {
         width: 40px;
         margin-left: 4px;
     }
 }
 
-#frame #sidepanel #profile .wrap img.online {
+#profile .wrap img.online {
     border: 2px solid #2ecc71;
 }
 
-#frame #sidepanel #profile .wrap img.away {
+#profile .wrap img.away {
     border: 2px solid #f1c40f;
 }
 
-#frame #sidepanel #profile .wrap img.busy {
+#profile .wrap img.busy {
     border: 2px solid #e74c3c;
 }
 
-#frame #sidepanel #profile .wrap img.offline {
+#profile .wrap img.offline {
     border: 2px solid #95a5a6;
 }
 
-#frame #sidepanel #profile .wrap p {
+#profile .wrap p {
     float: left;
     margin-left: 15px;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap p {
+    #profile .wrap p {
         display: none;
     }
 }
 
-#frame #sidepanel #profile .wrap i.expand-button {
+#profile .wrap i.expand-button {
     float: right;
     margin-top: 23px;
     font-size: 0.8em;
@@ -221,12 +221,12 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap i.expand-button {
+    #profile .wrap i.expand-button {
         display: none;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options {
+#profile .wrap #status-options {
     position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -243,25 +243,25 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options {
+    #profile .wrap #status-options {
         width: 58px;
         margin-top: 57px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options.active {
+#profile .wrap #status-options.active {
     opacity: 1;
     visibility: visible;
     margin: 75px 0 0 0;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options.active {
+    #profile .wrap #status-options.active {
         margin-top: 62px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options:before {
+#profile .wrap #status-options:before {
     content: '';
     position: absolute;
     width: 0;
@@ -273,33 +273,33 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options:before {
+    #profile .wrap #status-options:before {
         margin-left: 23px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options ul {
+#profile .wrap #status-options ul {
     overflow: hidden;
     border-radius: 6px;
 }
 
-    #frame #sidepanel #profile .wrap #status-options ul li {
+    #profile .wrap #status-options ul li {
         padding: 15px 0 30px 18px;
         display: block;
         cursor: pointer;
     }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options ul li {
+    #profile .wrap #status-options ul li {
         padding: 15px 0 35px 22px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li:hover {
+#profile .wrap #status-options ul li:hover {
     background: #496886;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+#profile .wrap #status-options ul li span.status-circle {
     position: absolute;
     width: 10px;
     height: 10px;
@@ -308,13 +308,13 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+    #profile .wrap #status-options ul li span.status-circle {
         width: 14px;
         height: 14px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+#profile .wrap #status-options ul li span.status-circle:before {
     content: '';
     position: absolute;
     width: 15.5px;
@@ -326,68 +326,68 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+    #profile .wrap #status-options ul li span.status-circle:before {
         height: 18px;
         width: 18px;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li p {
+#profile .wrap #status-options ul li p {
     padding-left: 12px;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #profile .wrap #status-options ul li p {
+    #profile .wrap #status-options ul li p {
         display: none;
     }
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {
+#profile .wrap #status-options ul li#status-online span.status-circle {
     background: #2ecc71;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {
+#profile .wrap #status-options ul li#status-online.active span.status-circle:before {
     border: 1px solid #2ecc71;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {
+#profile .wrap #status-options ul li#status-away span.status-circle {
     background: #f1c40f;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {
+#profile .wrap #status-options ul li#status-away.active span.status-circle:before {
     border: 1px solid #f1c40f;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {
+#profile .wrap #status-options ul li#status-busy span.status-circle {
     background: #e74c3c;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
+#profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
     border: 1px solid #e74c3c;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
+#profile .wrap #status-options ul li#status-offline span.status-circle {
     background: #95a5a6;
 }
 
-#frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
+#profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
     border: 1px solid #95a5a6;
 }
 
-#frame #sidepanel #profile .wrap #expanded {
+#profile .wrap #expanded {
     padding: 100px 0 0 0;
     display: block;
     line-height: initial !important;
 }
 
-    #frame #sidepanel #profile .wrap #expanded label {
+    #profile .wrap #expanded label {
         float: left;
         clear: both;
         margin: 0 8px 5px 0;
         padding: 5px 0;
     }
 
-    #frame #sidepanel #profile .wrap #expanded input {
+    #profile .wrap #expanded input {
         border: none;
         margin-bottom: 6px;
         background: #32465a;
@@ -397,29 +397,29 @@ body {
         width: calc(100% - 43px);
     }
 
-        #frame #sidepanel #profile .wrap #expanded input:focus {
+        #profile .wrap #expanded input:focus {
             outline: none;
             background: #435f7a;
         }
 
-#frame #sidepanel #search {
+.frame #sidepanel #search {
     border-top: 1px solid #32465a;
     border-bottom: 1px solid #32465a;
     font-weight: 300;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #search {
+    .frame #sidepanel #search {
         display: none;
     }
 }
 
-#frame #sidepanel #search label {
+.frame #sidepanel #search label {
     position: absolute;
     margin: 10px 0 0 20px;
 }
 
-#frame #sidepanel #search input {
+.frame #sidepanel #search input {
     font-family: "proxima-nova", "Source Sans Pro", sans-serif;
     padding: 10px 0 10px 46px;
     width: 100%; /*calc(100% - 25px);*/
@@ -428,59 +428,59 @@ body {
     color: #f5f5f5;
 }
 
-    #frame #sidepanel #search input:focus {
+    .frame #sidepanel #search input:focus {
         outline: none;
         background: #435f7a;
     }
 
-    #frame #sidepanel #search input::-webkit-input-placeholder {
+    .frame #sidepanel #search input::-webkit-input-placeholder {
         color: #f5f5f5;
     }
 
-    #frame #sidepanel #search input::-moz-placeholder {
+    .frame #sidepanel #search input::-moz-placeholder {
         color: #f5f5f5;
     }
 
-    #frame #sidepanel #search input:-ms-input-placeholder {
+    .frame #sidepanel #search input:-ms-input-placeholder {
         color: #f5f5f5;
     }
 
-    #frame #sidepanel #search input:-moz-placeholder {
+    .frame #sidepanel #search input:-moz-placeholder {
         color: #f5f5f5;
     }
 
-#frame #sidepanel #contacts {
+.frame #sidepanel #contacts {
     height: calc(100% - 177px);
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #contacts {
+    .frame #sidepanel #contacts {
         height: calc(100% - 149px);
         overflow-y: scroll;
         overflow-x: hidden;
     }
 
-        #frame #sidepanel #contacts::-webkit-scrollbar {
+        .frame #sidepanel #contacts::-webkit-scrollbar {
             display: none;
         }
 }
 
-#frame #sidepanel #contacts.expanded {
+.frame #sidepanel #contacts.expanded {
     height: calc(100% - 334px);
 }
 
-#frame #sidepanel #contacts::-webkit-scrollbar {
+.frame #sidepanel #contacts::-webkit-scrollbar {
     width: 8px;
     background: #2c3e50;
 }
 
-#frame #sidepanel #contacts::-webkit-scrollbar-thumb {
+.frame #sidepanel #contacts::-webkit-scrollbar-thumb {
     background-color: #243140;
 }
 
-#frame #sidepanel #contacts ul li.contact {
+.frame #sidepanel #contacts ul li.contact {
     position: relative;
     padding: 10px 0 15px 0;
     font-size: 0.9em;
@@ -488,37 +488,37 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #contacts ul li.contact {
+    .frame #sidepanel #contacts ul li.contact {
         padding: 6px 0 46px 8px;
     }
 }
 
-#frame #sidepanel #contacts ul li.contact:hover {
+.frame #sidepanel #contacts ul li.contact:hover {
     background: #32465a;
 }
 
-#frame #sidepanel #contacts ul li.contact.active {
+.frame #sidepanel #contacts ul li.contact.active {
     background: #32465a;
     border-right: 5px solid #435f7a;
 }
 
-    #frame #sidepanel #contacts ul li.contact.active span.contact-status {
+    .frame #sidepanel #contacts ul li.contact.active span.contact-status {
         border: 2px solid #32465a !important;
     }
 
-#frame #sidepanel #contacts ul li.contact .wrap {
+.frame #sidepanel #contacts ul li.contact .wrap {
     width: 88%;
     margin: 0 auto;
     position: relative;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #contacts ul li.contact .wrap {
+    .frame #sidepanel #contacts ul li.contact .wrap {
         width: 100%;
     }
 }
 
-#frame #sidepanel #contacts ul li.contact .wrap span {
+.frame #sidepanel #contacts ul li.contact .wrap span {
     position: absolute;
     left: 0;
     margin: -2px 0 0 -2px;
@@ -529,19 +529,19 @@ body {
     background: #95a5a6;
 }
 
-    #frame #sidepanel #contacts ul li.contact .wrap span.online {
+    .frame #sidepanel #contacts ul li.contact .wrap span.online {
         background: #2ecc71;
     }
 
-    #frame #sidepanel #contacts ul li.contact .wrap span.away {
+    .frame #sidepanel #contacts ul li.contact .wrap span.away {
         background: #f1c40f;
     }
 
-    #frame #sidepanel #contacts ul li.contact .wrap span.busy {
+    .frame #sidepanel #contacts ul li.contact .wrap span.busy {
         background: #e74c3c;
     }
 
-#frame #sidepanel #contacts ul li.contact .wrap img {
+.frame #sidepanel #contacts ul li.contact .wrap img {
     width: 40px;
     border-radius: 50%;
     float: left;
@@ -549,26 +549,26 @@ body {
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #contacts ul li.contact .wrap img {
+    .frame #sidepanel #contacts ul li.contact .wrap img {
         margin-right: 0px;
     }
 }
 
-#frame #sidepanel #contacts ul li.contact .wrap .meta {
+.frame #sidepanel #contacts ul li.contact .wrap .meta {
     padding: 5px 0 0 0;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #contacts ul li.contact .wrap .meta {
+    .frame #sidepanel #contacts ul li.contact .wrap .meta {
         display: none;
     }
 }
 
-#frame #sidepanel #contacts ul li.contact .wrap .meta .name {
+.frame #sidepanel #contacts ul li.contact .wrap .meta .name {
     font-weight: 600;
 }
 
-#frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
+.frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
     margin: 5px 0 0 0;
     padding: 0 0 1px;
     font-weight: 400;
@@ -581,7 +581,7 @@ body {
     transition: 1s all ease;
 }
 
-    #frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
+    .frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
         position: initial;
         border-radius: initial;
         background: none;
@@ -591,13 +591,13 @@ body {
         opacity: .5;
     }
 
-#frame #sidepanel #bottom-bar {
+.frame #sidepanel #bottom-bar {
     position: absolute;
     width: 100%;
     bottom: 0;
 }
 
-    #frame #sidepanel #bottom-bar button {
+    .frame #sidepanel #bottom-bar button {
         float: left;
         border: none;
         width: 50%;
@@ -610,45 +610,45 @@ body {
     }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #bottom-bar button {
+    .frame #sidepanel #bottom-bar button {
         float: none;
         width: 100%;
         padding: 15px 0;
     }
 }
 
-#frame #sidepanel #bottom-bar button:focus {
+.frame #sidepanel #bottom-bar button:focus {
     outline: none;
 }
 
-#frame #sidepanel #bottom-bar button:nth-child(1) {
+.frame #sidepanel #bottom-bar button:nth-child(1) {
     border-right: 1px solid #2c3e50;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #bottom-bar button:nth-child(1) {
+    .frame #sidepanel #bottom-bar button:nth-child(1) {
         border-right: none;
         border-bottom: 1px solid #2c3e50;
     }
 }
 
-#frame #sidepanel #bottom-bar button:hover {
+.frame #sidepanel #bottom-bar button:hover {
     background: #435f7a;
 }
 
-#frame #sidepanel #bottom-bar button i {
+.frame #sidepanel #bottom-bar button i {
     margin-right: 3px;
     font-size: 1em;
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #bottom-bar button i {
+    .frame #sidepanel #bottom-bar button i {
         font-size: 1.3em;
     }
 }
 
 @media screen and (max-width: 735px) {
-    #frame #sidepanel #bottom-bar button span {
+    .frame #sidepanel #bottom-bar button span {
         display: none;
     }
 }
@@ -802,7 +802,7 @@ body {
             border: none;
             width: calc(100% - 90px);
             padding: 11px 32px 10px 8px;
-            font-size: 0.8em;
+            font-size: 1em;
             color: #32465a;
         }
 
@@ -862,3 +862,12 @@ body {
     outline: none;
 }
 
+li[_ngcontent-c1] .glyphicon[_ngcontent-c1] {
+    margin-right: 10px;
+    /* background-color: green; */
+    border-radius: 50%;
+    border: 1px solid;
+    overflow: hidden;
+    padding: 3px;
+}
+span.online {/*background: #2ecc71;*/border-color:#2ecc71 !important;}

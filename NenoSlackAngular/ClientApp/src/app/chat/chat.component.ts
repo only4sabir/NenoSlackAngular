@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { $ } from "protractor";
 //import { Employee } from '../Model/employee.model';
 
 @Component({
@@ -16,6 +17,8 @@ export class ChatComponent implements OnInit {
   ReceiverId: number;
   SenderId: number;
   http: HttpClient;
+  msg: string; chatHistory: string;
+  
   constructor(chttp: HttpClient, private _route: ActivatedRoute) {
     this.domain = window.location.origin;
     this.http = chttp;
@@ -35,12 +38,15 @@ export class ChatComponent implements OnInit {
         console.log(result);
         this.ReceiverUser = result;
       }, error => console.error(error));
+      this.msg = "";
+      //alert('ioko');
+      //var element = document.getElementById("messagesList");
+      //element.remove();
+      //$("#messagesList ul").html('');
     });
     console.log(this.domain);
     console.log(window.location.href.split('/').pop());
     //this.userId = window.location.href.split('/').pop();
-    
-
   }
   
 
