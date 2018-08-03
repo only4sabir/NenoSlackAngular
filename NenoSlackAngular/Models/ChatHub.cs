@@ -36,14 +36,14 @@ namespace NenoSlackAngular.Models
                 currentUser.Img = ImgName;
             }
             List<string> readConId = new List<string>();
-            var u = users.Select(s => s.connectionIds).ToList();
-            foreach (var c in u)
+            var us = users.Select(s => s.connectionIds).ToList();
+            foreach (var c in us)
             {
                 readConId.AddRange(c);
             }
 
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
-            string lstOnlineUserId = String.Join("#liReceiverUserId", users.Select(s => s.UserId));
+            string lstOnlineUserId = String.Join("#liReceiverUserId", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
             await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "", lstOnlineUserId);
 
             //return null;
@@ -95,7 +95,7 @@ namespace NenoSlackAngular.Models
             }
 
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId; //;//.ToList<IReadOnlyList<string>>();
-                        
+
             //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);
             await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", UserId, message, null);
 
