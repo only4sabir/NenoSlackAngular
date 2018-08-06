@@ -6,14 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NenoSlackAngular.Models;
+using Newtonsoft.Json;
 
 namespace NenoSlackAngular.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class ChatDetailAPIController : ControllerBase
     {
         private readonly BloggingContext _context;
+
+        public object OnlineUser { get; private set; }
 
         public ChatDetailAPIController(BloggingContext context)
         {
@@ -21,14 +24,49 @@ namespace NenoSlackAngular.Controllers
         }
 
         // GET: api/ChatDetailAPI
+        [Route("api/[controller]")]
         [HttpGet]
         public IEnumerable<ChatDetail> GetChatDetail()
         {
             return _context.ChatDetail;
         }
+        //[Route("api/[controller]/GetOnlineUser/{userid}")]
+        [Route("api/[controller]/GetUserChat/{receiverid}")]
+        [HttpGet]
+        public List<vwChatDetail> GetUserChat(int receiverid)
+        {
+            int userid = 0;
+            if (HttpContext.Session.GetString("UseDetail") != null)
+            {
+                OnlineUser onlineUser = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
+                userid = onlineUser.UserId;
+            }
+
+            var dtl = (from c in _context.ChatDetail
+                       join u in _context.UserDetail
+                       on c.FromUserId equals u.UserId
+                       join r in _context.UserDetail
+                       on c.ToUserId equals r.UserId
+                       where (c.FromUserId == userid && c.ToUserId == receiverid) || (c.FromUserId == receiverid && c.ToUserId == userid)
+                       orderby c.CreatedOn
+                       select new vwChatDetail
+                       {
+                           chatId = c.ChatId,
+                           createdOn = c.CreatedOn.ToString("dd/MM HH:mm"),
+                           csscls = userid == c.FromUserId ? "sent" : "replies",
+                           fromUserId = c.FromUserId,
+                           IsRead = c.IsRead,
+                           message = c.Message,
+                           toUserId = c.ToUserId,
+                           img = c.FromUserId == userid ? u.Img : r.Img
+                       }).ToList();
+            return dtl;
+            // return _context.ChatDetail.Where(u => (u.FromUserId == userid && u.ToUserId == receiverid) || (u.FromUserId == receiverid && u.ToUserId == userid)).OrderBy(o => o.CreatedOn).ToList().Select(s => new vwChatDetail { chatId = s.ChatId, createdOn = s.CreatedOn.ToString("dd/MM HH:mm"), csscls = userid == s.FromUserId ? "sent" : "replies", fromUserId = s.FromUserId, IsRead = s.IsRead, message = s.Message, toUserId = s.ToUserId }).ToList<vwChatDetail>();
+        }
 
         // GET: api/ChatDetailAPI/5
-        [HttpGet("{id}")]
+        [Route("api/[controller]/{id}")]
+        [HttpGet]
         public async Task<IActionResult> GetChatDetail([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -47,6 +85,7 @@ namespace NenoSlackAngular.Controllers
         }
 
         // PUT: api/ChatDetailAPI/5
+        [Route("api/[controller]")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChatDetail([FromRoute] int id, [FromBody] ChatDetail chatDetail)
         {
@@ -82,6 +121,7 @@ namespace NenoSlackAngular.Controllers
         }
 
         // POST: api/ChatDetailAPI
+        [Route("api/[controller]")]
         [HttpPost]
         public async Task<IActionResult> PostChatDetail([FromBody] ChatDetail chatDetail)
         {
@@ -96,13 +136,15 @@ namespace NenoSlackAngular.Controllers
                 await _context.SaveChangesAsync();
 
                 return CreatedAtAction("GetChatDetail", new { id = chatDetail.ChatId }, chatDetail);
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 return null;
             }
         }
 
         // DELETE: api/ChatDetailAPI/5
+        [Route("api/[controller]")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteChatDetail([FromRoute] int id)
         {
@@ -123,6 +165,7 @@ namespace NenoSlackAngular.Controllers
             return Ok(chatDetail);
         }
 
+        [Route("api/[controller]")]
         private bool ChatDetailExists(int id)
         {
             return _context.ChatDetail.Any(e => e.ChatId == id);

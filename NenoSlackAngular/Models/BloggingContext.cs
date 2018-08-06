@@ -41,4 +41,16 @@ namespace NenoSlackAngular.Models
         public int UserId { get; set; }
         public UserDetail userDetails { get; set; }
     }
+    public class vwChatDetail
+    {
+        public int chatId { get; set; }
+        public int fromUserId { get; set; }
+        public int toUserId { get; set; }
+        public string message { get; set; }
+        public string createdOn { get; set; }
+        public string csscls { get; set; }
+        public bool IsRead { get; set; }
+        public string img { get; set; }
+
+    }
 }

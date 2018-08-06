@@ -22,5 +22,6 @@ namespace NenoSlackAngular.Models
         public string UserName { get; set; }
         public List<string> connectionIds { get; set; }
         public string Img { get; set; }
+        public int countUnread { get; set; }
     }
 }

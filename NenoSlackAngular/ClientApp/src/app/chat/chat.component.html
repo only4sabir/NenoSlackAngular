@@ -6,8 +6,13 @@
         <p>{{ReceiverUser.userName}}</p>
       </div>
       <div id="messagesList" class="messages">
-        <ul>
-           <!--<li class="sent">
+        <ul id="messagesList-ul">
+          <li class="{{c.csscls }}" *ngFor="let c of chatHistory">
+            <img src="/images/user/{{ReceiverUser.img}}" alt="" />
+            <p title="{{ReceiverUser.createdOn}}">{{c.message}} </p>
+            <span><!--6/8/2018 4:20-->{{c.createdOn}}</span>
+          </li>
+          <!--<li class="sent">
             <img src="/images/user/{{ReceiverUser.img}}" alt="" />
             <p>Hello, How are you</p>
           </li>
@@ -16,6 +21,7 @@
             <p>When you're backed against the wall, break the god damn thing down.</p>
           </li>-->
         </ul>
+        <div style="clear:both"></div>
       </div>
       <div class="message-input">
         <div class="wrap">

@@ -41,4 +41,5 @@ interface OnlineUser {
   userName: string;
   connectionIds: string[];
   img: string;
+  countUnread: number;
 }

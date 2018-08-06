@@ -12,7 +12,7 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/chatHub")
     .build();
 
-connection.on("ReceiveMessage", (UserId, message, lstOnlineUserId) => {
+connection.on("ReceiveMessage", (UserId, message,createdOn, lstOnlineUserId) => {
 
     if (lstOnlineUserId != undefined && lstOnlineUserId != null) {
         lstOnlineUserId = lstOnlineUserId.replace(/#/g, ',#');
@@ -25,7 +25,7 @@ connection.on("ReceiveMessage", (UserId, message, lstOnlineUserId) => {
         console.log(message);
         const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         const encodedMsg = msg;//user + " says " + msg;
-        addMessage(UserId, msg);
+        addMessage(UserId, msg, createdOn);
     }
 
     //UserId = $("#SenderUserId").val();
@@ -76,7 +76,7 @@ function sendMessage() {
         event.preventDefault();
     }
 }
-function addMessage(UserId, message) {
+function addMessage(UserId, message, createdOn) {
     //message = $(".message-input input").val();
     //if ($.trim(message) == '') {
     //    return false;
@@ -85,9 +85,10 @@ function addMessage(UserId, message) {
     if ($("#SenderUserId").val() == UserId) {
         msgStatus = 'sent';
     }
+    Img = $("#SenderImg").val();
     //console.log(senderId);
-    $('<li class="' + msgStatus + '"><img src="/images/user/sabir.jpg" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+    $('<li class="' + msgStatus + '"><img src="/images/user/' + Img + '" alt = "" /> <p>' + message + '</p> <span>' + createdOn+'</span></li > ').appendTo($('.messages ul'));
     $('#messageInput').val(null);
-    $('.contact.active .preview').html('<span>You: </span>' + message);
+    //$('.contact.active .preview').html('<span>You: </span>' + message);
     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
 };

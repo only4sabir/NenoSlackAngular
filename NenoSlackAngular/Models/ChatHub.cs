@@ -47,7 +47,7 @@ namespace NenoSlackAngular.Models
 
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
             string lstOnlineUserId = String.Join("#liReceiverUserId", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
-            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "", lstOnlineUserId);
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "","", lstOnlineUserId);
 
             //return null;
         }
@@ -99,7 +99,7 @@ namespace NenoSlackAngular.Models
             ChatDetail objChat = new ChatDetail();
             objChat.FromUserId = Convert.ToInt16(UserId);
             objChat.ToUserId = Convert.ToInt16(ReceiverUserId);
-            objChat.UserId = Convert.ToInt16(ReceiverUserId);
+            objChat.UserId = Convert.ToInt16(objChat.FromUserId);
             objChat.Message = message;
             objChat.CreatedOn = System.DateTime.Now;
             if (users.Where(s => s.UserId == objChat.ToUserId).ToList().Count > 0)
@@ -120,10 +120,10 @@ namespace NenoSlackAngular.Models
                 var response = await client.PostAsync("https://localhost:44314/api/ChatDetailAPI", stringContent);
 
             }
-            catch(Exception e)
+            catch
             { }
             //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);
-            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", UserId, message, null);
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", UserId, message, objChat.CreatedOn.ToString("dd/MM HH:mm"), null);
 
             //var o = Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", name, message, senderId);
             //await Clients.All.SendAsync("ReceiveMessage", UserId, message, lstConnectionId);

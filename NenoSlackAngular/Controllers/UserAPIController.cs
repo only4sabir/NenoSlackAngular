@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace NenoSlackAngular.Controllers
 {
-    
+
     [ApiController]
     public class UserAPIController : ControllerBase
     {
@@ -32,13 +32,63 @@ namespace NenoSlackAngular.Controllers
         [HttpGet]
         public IEnumerable<OnlineUser> GetAllUser()
         {
-            return _context.UserDetail.ToList().Select(s => new OnlineUser { UserId = s.UserId, UserName = s.UserName, Img = s.Img, connectionIds = new List<string>() });
+            //from c in categories
+            //join p in products on c equals p.Category into ps
+            //from p in ps.DefaultIfEmpty()
+
+            var dtl = (from u in _context.UserDetail
+                       from c in _context.ChatDetail.DefaultIfEmpty()
+                       where c.IsRead == false
+                       group new { c.IsRead }
+                       by new { u.UserId, u.UserName, u.Img } into g
+                       select new OnlineUser
+                       {
+                           UserId = g.Key.UserId,
+                           UserName = g.Key.UserName,
+                           Img = g.Key.Img,
+                           countUnread = g.Count(c => c.IsRead)
+                       }).ToList();
+
+            //var j = (from u in _context.UserDetail
+            //         join cj in _context.ChatDetail on u.UserId equals cj.UserId into gj
+            //         from c in gj.DefaultIfEmpty()
+            //         where c.IsRead == false
+            //         group new { c.IsRead }
+            //         by new { u.UserId, u.UserName, u.Img } into g
+            //         select new OnlineUser
+            //         {
+            //             UserId = g.Key.UserId,
+            //             UserName = g.Key.UserName,
+            //             Img = g.Key.Img,
+            //             countUnread = g.Count(c => c.IsRead)
+            //         }).ToList();
+
+
+            //var dtl = (from u in _context.UserDetail
+            //           join cl in _context.ChatDetail on u equals cl.userDetails into uj
+            //           from c in uj.DefaultIfEmpty()
+            //           where c.IsRead == false
+            //           group new { c.IsRead }
+            //           by new { u.UserId, u.UserName, u.Img } into g
+            //           select new OnlineUser
+            //           {
+            //               UserId = g.Key.UserId,
+            //               UserName = g.Key.UserName,
+            //               Img = g.Key.Img,
+            //               countUnread = g.Count(c => c.IsRead)
+            //           }).ToList();
+
+            return dtl;
+
+            //return _context.UserDetail.ToList().Select(s => new OnlineUser { UserId = s.UserId, UserName = s.UserName, Img = s.Img, connectionIds = new List<string>() });
+
+
         }
         [Route("api/UserAPI/GetLoginUser")]
         [HttpGet]
         public OnlineUser GetLoginUser()
         {
-            if(HttpContext.Session.GetString("UseDetail") != null)
+            if (HttpContext.Session.GetString("UseDetail") != null)
                 return JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
             return null;
             //return _context.UserDetail.ToList().Select(s => new OnlineUser { UserId = s.UserId, UserName = s.UserName, Img = s.Img, connectionIds = new List<string>() });
