@@ -38,7 +38,7 @@ namespace NenoSlackAngular.Controllers
 
             var dtl = (from u in _context.UserDetail
                        from c in _context.ChatDetail.DefaultIfEmpty()
-                       where c.IsRead == false
+                       //where c.IsRead == false
                        group new { c.IsRead }
                        by new { u.UserId, u.UserName, u.Img } into g
                        select new OnlineUser

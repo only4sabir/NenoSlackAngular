@@ -28,7 +28,7 @@
           <input type="hidden" id="ReceiverUserId" value="" [(ngModel)]="ReceiverUser.userId" />
           <input type="hidden" id="txtConnectionId" value="s" />
           <input type="text" id="messageInput" placeholder="Write your message..." [(ngModel)]="msg" />
-          <button class="submit" id="sendButton" onclick="sendMessage();">Send</button>
+          <button class="submit" id="sendButton"  (click)="AddMessage();" onclick="sendMessage();" >Send</button>
         </div>
       </div>
       <!--<form #form="ngForm" name="myForm" novalidate>
@@ -45,12 +45,3 @@
     </div>
   </div>
 </div>
-
-<!--onclick="return checkValidation();"
-onclick="return callAPI();"
-(click)="create()"-->
-<!--{{form.prestine}}-->
-<!--Model : {{ department | json }}-->
-<!--<div>
-  <a [routerLink]='["/fetch-department"]'>Back to List</a>
-</div>-->

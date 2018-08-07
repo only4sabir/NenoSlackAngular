@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { $ } from "protractor";
-import { Time } from "@angular/common";
+import { DatePipe } from "@angular/common";
 //import { Employee } from '../Model/employee.model';
 
 @Component({
@@ -16,12 +16,14 @@ export class ChatComponent implements OnInit {
   public ReceiverUser: OnlineUser;
   public chatHistory: chatDetail[];
   public clnchatHistory: chatDetail[];
-  domain: string;
-  ReceiverId: number;
-  SenderId: number;
-  http: HttpClient;
-  msg: string;
+  public datePipe: DatePipe;
+  public domain: string;
+  public ReceiverId: number;
+  public SenderId: number;
+  public http: HttpClient;
+  public msg: string;
   public LoginUser: OnlineUser;
+  public cd: chatDetail;
 
   constructor(chttp: HttpClient, private _route: ActivatedRoute) {
     this.domain = window.location.origin;
@@ -44,6 +46,7 @@ export class ChatComponent implements OnInit {
 
   }
   ngOnInit() {
+
     this._route.params.subscribe(params => {
       this.userId = params['userid'];
       this.http.get<OnlineUser>(this.domain + '/api/UserAPI/GetOnlineUser/' + this.userId).subscribe(result => {
@@ -55,7 +58,7 @@ export class ChatComponent implements OnInit {
       //var myList = document.getElementById('messagesList-ul');
       //myList.innerHTML = '';
       this.http.get<chatDetail[]>(this.domain + '/api/ChatDetailAPI/GetUserChat/' + this.userId).subscribe(result => {
-        //console.log(result);
+        console.log(result);
         this.chatHistory = result;
       }, error => console.error(error));
       this.msg = "";
@@ -68,7 +71,22 @@ export class ChatComponent implements OnInit {
     //console.log(window.location.href.split('/').pop());
     //this.userId = window.location.href.split('/').pop();
   }
-
+  public AddMessage() {
+    //alert(this.datePipe.transform(new Date(), 'dd/MM HH:mm'));
+    console.log(this.cd);
+    //debugger;
+    this.cd = new chatDetail();
+    //this.cd = this.chatDetail;
+    
+    //this.cd.fromUserId = Number(document.getElementById("SenderUserId").value);
+    //this.cd.toUserId = Number(document.getElementById("ReceiverUserId").value);
+    //this.cd.csscls = "sent";
+    //this.cd.IsRead = true;
+    //this.cd.message = document.getElementById("messageInput").value;
+    ////this.cd.createdOn = this.datePipe.transform(new Date(), 'dd/MM HH:mm');
+    //this.cd.img = document.getElementById("SenderImg").value;
+    this.chatHistory.push(this.cd);
+  }
 
   //ngOnInit() {
   //  this._route.params.subscribe(params => {
@@ -89,9 +107,6 @@ export class ChatComponent implements OnInit {
   //  }, error => console.error(error))
   //}
 
-  send() {
-
-  }
   //deleteEmployee(id: string) {
   //  if (confirm("Are you sure you want to Delete?")) {
   //    this.http.delete("https://localhost:44340/api/EmployeeAPI/" + id).
@@ -108,7 +123,7 @@ interface OnlineUser {
   img: string;
 }
 //chatId":5,"fromUserId":1,"toUserId":3,"message":"dxvxv","createdOn":"2018-08-03T17:36:10.112777","isRead":false,"userId":1,"userDetails":nul
-interface chatDetail {
+class chatDetail {
   chatId: number;
   fromUserId: number;
   toUserId: number;
@@ -118,4 +133,3 @@ interface chatDetail {
   IsRead: boolean;
   img: string;
 }
-

@@ -81,6 +81,8 @@ function addMessage(UserId, message, createdOn) {
     //if ($.trim(message) == '') {
     //    return false;
     //}
+    
+    //chatHistory.push({ 'createdOn': "07-08 09:39", 'csscls': "sent", 'img': "sabir.jpg", 'isRead': false, 'message': "Hello" });
     var msgStatus = 'replies';
     if ($("#SenderUserId").val() == UserId) {
         msgStatus = 'sent';
@@ -90,5 +92,5 @@ function addMessage(UserId, message, createdOn) {
     $('<li class="' + msgStatus + '"><img src="/images/user/' + Img + '" alt = "" /> <p>' + message + '</p> <span>' + createdOn+'</span></li > ').appendTo($('.messages ul'));
     $('#messageInput').val(null);
     //$('.contact.active .preview').html('<span>You: </span>' + message);
-    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    $(".messages").animate({scrollTop: $(".messages").height() }, "fast");
 };
