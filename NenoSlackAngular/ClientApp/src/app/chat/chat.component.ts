@@ -47,7 +47,7 @@ export class ChatComponent implements OnInit {
     this._route.params.subscribe(params => {
       this.userId = params['userid'];
       this.http.get<OnlineUser>(this.domain + '/api/UserAPI/GetOnlineUser/' + this.userId).subscribe(result => {
-        console.log(result);
+        //console.log(result);
         this.ReceiverUser = result;
       }, error => console.error(error));
       this.chatHistory = this.clnchatHistory;
@@ -55,7 +55,7 @@ export class ChatComponent implements OnInit {
       //var myList = document.getElementById('messagesList-ul');
       //myList.innerHTML = '';
       this.http.get<chatDetail[]>(this.domain + '/api/ChatDetailAPI/GetUserChat/' + this.userId).subscribe(result => {
-        console.log(result);
+        //console.log(result);
         this.chatHistory = result;
       }, error => console.error(error));
       this.msg = "";
@@ -64,8 +64,8 @@ export class ChatComponent implements OnInit {
       //element.remove();
       //$("#messagesList ul").html('');
     });
-    console.log(this.domain);
-    console.log(window.location.href.split('/').pop());
+    //console.log(this.domain);
+    //console.log(window.location.href.split('/').pop());
     //this.userId = window.location.href.split('/').pop();
   }
 

@@ -7,17 +7,18 @@
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </button>
-      <a class='navbar-brand' [routerLink]='["/"]'>Promact Chat</a>
+      <!--<a class='navbar-brand' [routerLink]='["/"]'>Promact Chat</a>-->
+      <a class='navbar-brand'>Promact Chat</a>
     </div>
     <div class='clearfix'></div>
 
     <div id="profile">
-      <div class="wrap">
+      <div class="wrap" *ngIf="LoginUser">
         <img id="profile-img" src="images/user/{{LoginUser.img}}" class="online" alt="" />
         <p>{{LoginUser.userName}} <!--<span *ngIf="{{loginUser.countUnread >= 0}}"> ({{loginUser.countUnread > 0}}) </span>--></p>
       </div>
     </div>
-    <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
+    <div class='navbar-collapse collapse' *ngIf="LoginUser">
       <input type="hidden" id="SenderUserId" value="0" [(ngModel)]="LoginUser.userId" />
       <input type="hidden" id="SenderUserName" value="0" [(ngModel)]="LoginUser.userName" />
       <input type="hidden" id="SenderImg" value="0" [(ngModel)]="LoginUser.img" />

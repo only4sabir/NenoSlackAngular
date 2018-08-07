@@ -21,8 +21,8 @@ connection.on("ReceiveMessage", (UserId, message,createdOn, lstOnlineUserId) => 
         $(lstOnlineUserId).addClass('online');
     }
     else {
-        console.log(UserId);
-        console.log(message);
+        //console.log(UserId);
+        //console.log(message);
         const msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         const encodedMsg = msg;//user + " says " + msg;
         addMessage(UserId, msg, createdOn);

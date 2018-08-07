@@ -36,20 +36,86 @@ body {
 }
 /*
 ---------------------------------------*/
-.loginmain{    margin-top: -150px;    position: absolute; left:0px; right:0;    top: 50%;    width:400px; margin-left:auto; margin-right:auto;}
-.login {    padding: 15px 35px 35px 35px;    background: url(/images/loginbg.png) repeat;    border-radius: 5px;    position: relative;}
-.loginmain input[type=text], input[type=password] {    width: 100%;    padding: 12px 20px;    margin: 8px 0;    display: inline-block;    border: 1px solid #ccc;    box-sizing: border-box;}
-.loginmain button {    background-color: #4CAF50;    color: white;    padding: 14px 20px;    margin: 8px 0;    border: none;    cursor: pointer;    width: 100%;}
-.loginmain button:hover {        opacity: 0.8;    }
-.loginmain .cancelbtn {    width: auto;    padding: 10px 18px;    background-color: #f44336;}
-.loginmain .imgcontainer {    text-align: center;    margin: 24px 0 12px 0;}
-.loginmain img.avatar {    width: 70%;    }
-.loginmain .container {    padding: 16px;}
-.loginmain span.psw {    float: right;    padding-top: 16px;}
-.loginmain b{    color: #fff;}
-.r {float:right;}
-.chatmain {width:100% !important;}
-.c {clear:both;}
+.loginmain {
+    margin-top: -150px;
+    position: absolute;
+    left: 0px;
+    right: 0;
+    top: 50%;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login {
+    padding: 15px 35px 35px 35px;
+    background: url(/images/loginbg.png) repeat;
+    border-radius: 5px;
+    position: relative;
+}
+
+.loginmain input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.loginmain button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .loginmain button:hover {
+        opacity: 0.8;
+    }
+
+.loginmain .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.loginmain .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+.loginmain img.avatar {
+    width: 70%;
+}
+
+.loginmain .container {
+    padding: 16px;
+}
+
+.loginmain span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.loginmain b {
+    color: #fff;
+}
+
+.r {
+    float: right;
+}
+
+.chatmain {
+    width: 100% !important;
+}
+
+.c {
+    clear: both;
+}
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
     span.psw {
@@ -61,8 +127,15 @@ body {
         width: 100%;
     }
 }
-.chatmain .imgcontainer{height: 15px;}
-.chatmain .imgcontainer img{width: 250px;margin: 15px 10px;}
+
+.chatmain .imgcontainer {
+    height: 15px;
+}
+
+    .chatmain .imgcontainer img {
+        width: 250px;
+        margin: 15px 10px;
+    }
 
 /*body {
     display: flex;
@@ -87,7 +160,7 @@ body {
     min-height: 300px;
     max-height: 700px;
     background: #E6EAEA;
-    margin-top:16px;
+    margin-top: 16px;
 }
 
 @media screen and (max-width: 360px) {
@@ -681,33 +754,33 @@ body {
     background: #f5f5f5;
 }
 
-#frame .content .contact-profile img {
-    width: 40px;
-    border-radius: 50%;
-    float: left;
-    margin: 9px 12px 0 9px;
-}
+    #frame .content .contact-profile img {
+        width: 40px;
+        border-radius: 50%;
+        float: left;
+        margin: 9px 12px 0 9px;
+    }
 
-#frame .content .contact-profile p {
-    float: left;
-}
+    #frame .content .contact-profile p {
+        float: left;
+    }
 
-#frame .content .contact-profile .social-media {
-    float: right;
-}
+    #frame .content .contact-profile .social-media {
+        float: right;
+    }
 
-#frame .content .contact-profile .social-media i {
-    margin-left: 14px;
-    cursor: pointer;
-}
+        #frame .content .contact-profile .social-media i {
+            margin-left: 14px;
+            cursor: pointer;
+        }
 
-#frame .content .contact-profile .social-media i:nth-last-child(1) {
-    margin-right: 20px;
-}
+            #frame .content .contact-profile .social-media i:nth-last-child(1) {
+                margin-right: 20px;
+            }
 
-#frame .content .contact-profile .social-media i:hover {
-    color: #435f7a;
-}
+            #frame .content .contact-profile .social-media i:hover {
+                color: #435f7a;
+            }
 
 #frame .content .messages {
     height: auto;
@@ -737,7 +810,6 @@ body {
     display: inline-block;
     clear: both;
     float: left;
-    margin: 15px 15px 5px -4px;
     width: calc(100% - 25px);
     font-size: 0.9em;
 }
@@ -870,5 +942,11 @@ li[_ngcontent-c1] .glyphicon[_ngcontent-c1] {
     overflow: hidden;
     padding: 3px;
 }
-span.online {/*background: #2ecc71;*/border-color:#2ecc71 !important;}
-#messagesList-ul li span{font-size:12px;}
+
+span.online { /*background: #2ecc71;*/
+    border-color: #2ecc71 !important;
+}
+
+#messagesList-ul li span {
+    font-size: 12px;
+}

@@ -1,15 +1,15 @@
 <div id="frame">
   <div class="content">
-    <div class="contact-profile">
+    <div class="contact-profile" *ngIf="ReceiverUser">
       <div class="contact-profile">
         <img src="images/user/{{ReceiverUser.img}}" alt="" />
         <p>{{ReceiverUser.userName}}</p>
       </div>
       <div id="messagesList" class="messages">
-        <ul id="messagesList-ul">
+        <ul id="messagesList-ul" >
           <li class="{{c.csscls }}" *ngFor="let c of chatHistory">
-            <img src="/images/user/{{ReceiverUser.img}}" alt="" />
-            <p title="{{ReceiverUser.createdOn}}">{{c.message}} </p>
+            <img src="/images/user/{{c.img}}" alt="" />
+            <p title="{{c.createdOn}}">{{c.message}} </p>
             <span><!--6/8/2018 4:20-->{{c.createdOn}}</span>
           </li>
           <!--<li class="sent">
@@ -24,7 +24,7 @@
         <div style="clear:both"></div>
       </div>
       <div class="message-input">
-        <div class="wrap">
+        <div class="wrap" *ngIf="ReceiverUser">
           <input type="hidden" id="ReceiverUserId" value="" [(ngModel)]="ReceiverUser.userId" />
           <input type="hidden" id="txtConnectionId" value="s" />
           <input type="text" id="messageInput" placeholder="Write your message..." [(ngModel)]="msg" />

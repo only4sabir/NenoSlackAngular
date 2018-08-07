@@ -12,14 +12,15 @@ export class NavMenuComponent {
   public users: OnlineUser[];
   public LoginUser: OnlineUser;
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    console.log(baseUrl);
+    //console.log(baseUrl);
     http.get<OnlineUser[]>(baseUrl + 'api/UserAPI/GetAllUser').subscribe(result => {
-      console.log(result);
+      //console.log(result);
       this.users = result;
     }, error => console.error(error));
 
     http.get<OnlineUser>(baseUrl + 'api/UserAPI/GetLoginUser').subscribe(result => {
-      console.log(result);
+      //console.log('Login  -->');
+      //console.log(result);
       if (result == null) {
         window.location.href = "/Login";
       }
