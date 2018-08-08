@@ -47,6 +47,7 @@ $(document).ready(function () {
 //connection.start().catch(err => console.error(err.toString()));
 
 connection.start().then(res => {
+    $("#messagesList-ul li:not(.ch)").remove();
     //connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
 }).catch(err => console.error(err.toString()));
 //console.log('end');

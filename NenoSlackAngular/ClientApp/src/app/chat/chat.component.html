@@ -7,7 +7,7 @@
       </div>
       <div id="messagesList" class="messages">
         <ul id="messagesList-ul" >
-          <li class="{{c.csscls }}" *ngFor="let c of chatHistory">
+          <li class="ch {{c.csscls }}" *ngFor="let c of chatHistory">
             <img src="/images/user/{{c.img}}" alt="" />
             <p title="{{c.createdOn}}">{{c.message}} </p>
             <span><!--6/8/2018 4:20-->{{c.createdOn}}</span>
