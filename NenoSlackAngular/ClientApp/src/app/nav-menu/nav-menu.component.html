@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class='navbar-collapse collapse' *ngIf="LoginUser">
-      <input type="hidden" id="SenderUserId" value="0" [(ngModel)]="LoginUser.userId" />
+      <input type="hidden" id="SenderUserId" name="SenderUserId" value="0" [(ngModel)]="LoginUser.userId" />
       <input type="hidden" id="SenderUserName" value="0" [(ngModel)]="LoginUser.userName" />
       <input type="hidden" id="SenderImg" value="0" [(ngModel)]="LoginUser.img" />
       <ul class='nav navbar-nav'>

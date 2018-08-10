@@ -5,43 +5,55 @@
         <img src="images/user/{{ReceiverUser.img}}" alt="" />
         <p>{{ReceiverUser.userName}}</p>
       </div>
-      <div id="messagesList" class="messages">
-        <ul id="messagesList-ul" >
+      <div id="messagesList" class="messages" *ngIf="chatHistory">
+        <ul id="messagesList-ul">
           <li class="ch {{c.csscls }}" *ngFor="let c of chatHistory">
             <img src="/images/user/{{c.img}}" alt="" />
             <p title="{{c.createdOn}}">{{c.message}} </p>
-            <span><!--6/8/2018 4:20-->{{c.createdOn}}</span>
+            <span><!--6/8/2018 4:20-->{{c.createdOn | date: 'd/M/yyyy HH:MM' }}</span>
           </li>
           <!--<li class="sent">
-            <img src="/images/user/{{ReceiverUser.img}}" alt="" />
-            <p>Hello, How are you</p>
-          </li>
-          <li class="replies">
-            <img src="~/images/user/sabir.jpg" alt="" />
-            <p>When you're backed against the wall, break the god damn thing down.</p>
-          </li>-->
+        <img src="/images/user/{{ReceiverUser.img}}" alt="" />
+        <p>Hello, How are you</p>
+      </li>
+      <li class="replies">
+        <img src="~/images/user/sabir.jpg" alt="" />
+        <p>When you're backed against the wall, break the god damn thing down.</p>
+      </li>-->
         </ul>
         <div style="clear:both"></div>
       </div>
-      <div class="message-input">
+      <form class="form-inline" (ngSubmit)="sendMessage()" *ngIf="cd">
+        <div class="message-input" >
+          <div class="wrap">
+            <input type="text" id="messageInput" placeholder="Write your message..." name="message" [(ngModel)]="cd.message" />
+
+            <button type="submit" class="submit" id="sendButton">Send</button>
+          </div>
+        </div>
+        <!--<footer class="footer" style="width:70%;background:#fdd679; bottom:0%;position:fixed">
+          <div class="container">
+            <div class="row" style="background:#fdd679;">
+              <div class="col-sm-9">
+
+                <div style="width:100%;  padding-top: 10px;" class="clearfix">
+                  <input type="text" style="width:50%;padding:0px 2%;margin-bottom:5px; float:left; height:32px;" type="text" id="message" [(ngModel)]="chatMessage.message" name="message" class="form-control pull-left shadow" input-focus="content" />
+
+                  <input style="width:26%;padding:6px 0px;text-align:center;margin-bottom:5px; float:right; border-radius:3px; background:#e9a403;" id="sendmessage" class="btn btn-default pull-right shadow" type="submit" value="Send" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>-->
+      </form>
+      <!--<div class="message-input">
         <div class="wrap" *ngIf="ReceiverUser">
           <input type="hidden" id="ReceiverUserId" value="" [(ngModel)]="ReceiverUser.userId" />
           <input type="hidden" id="txtConnectionId" value="s" />
           <input type="text" id="messageInput" placeholder="Write your message..." [(ngModel)]="msg" />
-          <button class="submit" id="sendButton"  (click)="AddMessage();" onclick="sendMessage();" >Send</button>
+          <button class="submit" id="sendButton" (click)="AddMessage();" onclick="sendMessage();">Send</button>
         </div>
-      </div>
-      <!--<form #form="ngForm" name="myForm" novalidate>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" [(ngModel)]="ReceiverUser.userId" id="ReceiverUserId" name="ReceiverUserId" />
-        <div class="form-group">
-          <label class="control-label">{{ReceiverUser.userName}}</label>
-          <input name="name" id="name" class="form-control cmpsl" [(ngModel)]="ReceiverUser.userName" required />
-        </div>
-        <div class="form-group">
-          <input type="submit" value='Send' class="btn btn-default" (click)="send()" />
-        </div>
-      </form>-->
+      </div>-->
     </div>
   </div>
 </div>

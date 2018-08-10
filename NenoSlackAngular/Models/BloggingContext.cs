@@ -47,7 +47,8 @@ namespace NenoSlackAngular.Models
         public int fromUserId { get; set; }
         public int toUserId { get; set; }
         public string message { get; set; }
-        public string createdOn { get; set; }
+        public string createdOn1 { get; set; }
+        public DateTime createdOn { get; set; }
         public string csscls { get; set; }
         public bool IsRead { get; set; }
         public string img { get; set; }

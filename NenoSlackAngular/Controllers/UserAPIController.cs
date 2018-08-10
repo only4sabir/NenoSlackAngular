@@ -15,12 +15,10 @@ namespace NenoSlackAngular.Controllers
     public class UserAPIController : ControllerBase
     {
         private readonly BloggingContext _context;
-
         public UserAPIController(BloggingContext context)
         {
             _context = context;
         }
-
         // GET: api/UserAPI
         [Route("api/[controller]")]
         [HttpGet]

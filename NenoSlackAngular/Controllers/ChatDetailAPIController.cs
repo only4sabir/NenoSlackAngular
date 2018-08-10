@@ -52,7 +52,7 @@ namespace NenoSlackAngular.Controllers
                        select new vwChatDetail
                        {
                            chatId = c.ChatId,
-                           createdOn = c.CreatedOn.ToString("dd/MM HH:mm"),
+                           createdOn = c.CreatedOn,//.ToString("dd/MM HH:mm"),
                            csscls = userid == c.FromUserId ? "sent" : "replies",
                            fromUserId = c.FromUserId,
                            IsRead = c.IsRead,

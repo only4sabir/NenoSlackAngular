@@ -13,6 +13,22 @@ namespace NenoSlackAngular.Models
 {
     public class ChatHub : Hub
     {
+        private static List<OnlineUser> users = new List<OnlineUser>();
+        public async Task SendMessage(ChatMessage message)
+        {
+            try
+            {
+                await Clients.All.SendAsync("ReceiveMessage", message);
+            }
+            catch(Exception)
+            { 
+                await Clients.All.SendAsync("ReceiveMessage", message);
+            }
+        }
+
+    }
+    public class ChatHub1 : Hub
+    {
         //private static List<string> users = new List<string>();
         private static List<OnlineUser> users = new List<OnlineUser>();
 
@@ -47,7 +63,7 @@ namespace NenoSlackAngular.Models
 
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
             string lstOnlineUserId = String.Join("#liReceiverUserId", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
-            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "","", lstOnlineUserId);
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage", "", "", "", lstOnlineUserId);
 
             //return null;
         }

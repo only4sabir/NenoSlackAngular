@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NenoSlackAngular.Hubs;
 using NenoSlackAngular.Models;
 using System;
 
@@ -85,9 +86,15 @@ namespace AngularTest
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSignalR(routes =>
+            //app.UseSignalR(routes =>
+            //{
+            //    routes.MapHub<ChatHub>("/chatHub");
+            //});
+
+            app.UseSignalR(route =>
             {
-                routes.MapHub<ChatHub>("/chatHub");
+                route.MapHub<ChatHub>("/chathub");
+                route.MapHub<DynamicChatHub>("/dynamichub");
             });
             app.UseSpa(spa =>
             {

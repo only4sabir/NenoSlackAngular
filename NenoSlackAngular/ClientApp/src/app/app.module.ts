@@ -16,6 +16,10 @@ import { Employee } from './Model/employee.model';
 import { EmployeeComponent } from './employee/employee.component';
 import { EmployeeCreateComponent } from './employee/employee.create.component';
 import { ChatComponent } from './chat/chat.component';
+import { DynamicHubComponent } from './DynamicHub/dynamichub.component';
+import { SignalRService } from './services/signalR.service';
+import { DynamicHubSignalRService } from './services/dynamicHub.signalR.service';
+import { chataComponent } from './chat/chata.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import { ChatComponent } from './chat/chat.component';
     DepartmentCreateComponent,
     EmployeeComponent,
     EmployeeCreateComponent,
-    ChatComponent
+    DynamicHubComponent,
+    ChatComponent,
+    chataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,12 +50,15 @@ import { ChatComponent } from './chat/chat.component';
       { path: 'fetch-department-create/:id', component: DepartmentCreateComponent },
       { path: 'fetch-employee', component: EmployeeComponent },
       { path: 'fetch-employee-create/:id', component: EmployeeCreateComponent },
+      { path: 'chata', component: chataComponent },
+      { path: 'chatter', component: DynamicHubComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'chat/:userid', component: ChatComponent },
       { path: '**', component: FetchDataComponent }
     ])
   ],
-  providers: [],
+  providers: [SignalRService, DynamicHubSignalRService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

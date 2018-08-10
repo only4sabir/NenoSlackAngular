@@ -43,6 +43,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ChatHub.cs" />
+    <Compile Remove="Models\DynamicChatHub.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\_ViewImports.cshtml" />
   </ItemGroup>
 
@@ -51,8 +56,13 @@
     <None Remove="ClientApp\src\app\department\department.component.ts" />
     <None Remove="ClientApp\src\app\employee\employee.component.ts" />
     <None Remove="ClientApp\src\app\employee\employee.create.component.ts" />
+    <None Remove="ClientApp\src\app\Model\chatdetail.model.ts" />
+    <None Remove="ClientApp\src\app\Model\chatmessage.model.ts" />
     <None Remove="ClientApp\src\app\Model\department.model.ts" />
     <None Remove="ClientApp\src\app\Model\employee.model.ts" />
+    <None Remove="ClientApp\src\app\Model\onlineuser.model.ts" />
+    <None Remove="ClientApp\src\app\Model\tab.model.ts" />
+    <None Remove="ClientApp\src\app\Services\signalR.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,8 +102,13 @@
     <TypeScriptCompile Include="ClientApp\src\app\department\department.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\employee\employee.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\employee\employee.create.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Model\chatdetail.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Model\chatmessage.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Model\department.model.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Model\employee.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Model\onlineuser.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Model\tab.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\signalR.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
