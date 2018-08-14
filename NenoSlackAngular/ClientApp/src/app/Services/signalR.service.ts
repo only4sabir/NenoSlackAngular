@@ -7,6 +7,7 @@ import { chatDetail } from '../Model/chatdetail.model';
 export class SignalRService {
   messageReceived = new EventEmitter<chatDetail>();
   connectionEstablished = new EventEmitter<Boolean>();
+  OnlineUserId = new EventEmitter<string>();
 
   private connectionIsEstablished = false;
   private _hubConnection: HubConnection;
@@ -15,6 +16,7 @@ export class SignalRService {
     this.createConnection();
     this.registerOnServerEvents();
     this.startConnection();
+    //this.GetOnlineUserId();
   }
   //////////////////////////////////
   addUserIdInContextId(userId: number, UserName: string, ImgName: string) {
@@ -28,6 +30,9 @@ export class SignalRService {
     this._hubConnection.invoke('SendMessage', message);
   }
 
+  GetOnlineUserId() {
+    this._hubConnection.invoke('GetLoginUserId');
+  }
   private createConnection() {
     this._hubConnection = new HubConnectionBuilder()
       .withUrl(window.location.origin + '/ChatHub')
@@ -52,5 +57,18 @@ export class SignalRService {
     this._hubConnection.on('ReceiveMessage', (data: any) => {
       this.messageReceived.emit(data);
     });
+    this._hubConnection.on('ReceiveMessageOnlineUser', (data: string) => {
+      console.log('ReceiveMessageOnlineUser -> ' + data);
+      this.OnlineUserId.emit(data);
+      //this._hubConnection.invoke('GetLoginUserId');
+    });
   }
+  //private GetOnlineUserId(): void {
+  //  this._hubConnection.invoke('SendMessage', message);
+  //  //this._hubConnection.on('ReceiveMessageOnlineUser', (data: string) => {
+  //  //  console.log('ReceiveMessageOnlineUser -> ' + data);
+  //  //  this.OnlineUserId.emit(data);
+  //  //  //this._hubConnection.invoke('GetLoginUserId');
+  //  //});
+  //}
 }  

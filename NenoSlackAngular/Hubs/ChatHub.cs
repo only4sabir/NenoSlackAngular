@@ -33,6 +33,20 @@ namespace NenoSlackAngular.Hubs
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SignalR Users");
             await base.OnDisconnectedAsync(exception);
         }
+        public async Task GetLoginUserId()
+        {
+            List<string> readConId = new List<string>();
+            var us = users.Select(s => s.connectionIds).ToList();
+            foreach (var c in us)
+            {
+                readConId.AddRange(c);
+            }
+
+            IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
+            string lstOnlineUserId = String.Join(",", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
+            lstOnlineUserId = lstOnlineUserId + ",";
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessageOnlineUser", lstOnlineUserId);
+        }
         public async Task ConnectUser(int userId, string UserName, string ImgName)
         {
             if (users.Where(s => s.UserId == userId).ToList().Count > 0)
@@ -41,7 +55,6 @@ namespace NenoSlackAngular.Hubs
                 var user = users.Where(s => s.UserId == 0 && s.connectionIds.Contains(Context.ConnectionId)).FirstOrDefault();
                 if (user != null)
                     users.Remove(user);
-                users.RemoveAll(s => s.UserId == 0 && s.connectionIds.Count == 0);
             }
             else
             {
@@ -50,6 +63,7 @@ namespace NenoSlackAngular.Hubs
                 currentUser.UserName = UserName;
                 currentUser.Img = ImgName;
             }
+            users.RemoveAll(s => s.UserId == 0 && s.connectionIds.Count == 0);
             List<string> readConId = new List<string>();
             var us = users.Select(s => s.connectionIds).ToList();
             foreach (var c in us)

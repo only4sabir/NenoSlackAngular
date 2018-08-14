@@ -49,6 +49,7 @@ export class ChatComponent implements OnInit {
         //console.log(result);
         this.ReceiverUser = result;
       }, error => console.error(error));
+      this.signalrService.GetOnlineUserId();
 
       //get all chat history 
       this.http.get<chatDetail[]>(this.domain + '/api/ChatDetailAPI/GetUserChat/' + this.ReceiverUserId).subscribe(result => {
@@ -61,8 +62,12 @@ export class ChatComponent implements OnInit {
   }
   //for message receiving in this
   private subscribeToEvents(): void {
+    console.log('call subscribeToEvents ->' + this.LoginUser);
     this.signalrService.connectionEstablished.subscribe(() => {
-      this.signalrService.addUserIdInContextId(this.LoginUser.userId, this.LoginUser.userName, this.LoginUser.img);
+      console.log('send user method ->' + this.LoginUser);
+      if (this.LoginUser != undefined) {
+        this.signalrService.addUserIdInContextId(this.LoginUser.userId, this.LoginUser.userName, this.LoginUser.img);
+      }
       this.canSendMessage = true;
     });
 
