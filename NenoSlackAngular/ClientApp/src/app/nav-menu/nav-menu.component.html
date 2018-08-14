@@ -30,7 +30,7 @@
         </li>-->
         <li *ngFor="let user of users" [routerLinkActive]='["link-active"]'>
           <a [routerLink]="['/chat', user.userId]" (click)='collapse()'>
-            <span id="liReceiverUserId{{user.userId}}" class='glyphicon glyphicon-user'></span> {{user.userName}}
+            <span id="liReceiverUserId{{user.userId}}" class='glyphicon glyphicon-user {{user.IsOnline ? "online" : ""}}'></span> {{user.userName}}
           </a>
         </li>
         <!--<li [routerLinkActive]='["link-active"]'>

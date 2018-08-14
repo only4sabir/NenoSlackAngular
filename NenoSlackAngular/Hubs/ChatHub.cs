@@ -41,6 +41,7 @@ namespace NenoSlackAngular.Hubs
                 var user = users.Where(s => s.UserId == 0 && s.connectionIds.Contains(Context.ConnectionId)).FirstOrDefault();
                 if (user != null)
                     users.Remove(user);
+                users.RemoveAll(s => s.UserId == 0 && s.connectionIds.Count == 0);
             }
             else
             {
@@ -57,8 +58,11 @@ namespace NenoSlackAngular.Hubs
             }
 
             IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
-            string lstOnlineUserId = String.Join("#liReceiverUserId", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
-            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessage1", lstOnlineUserId);
+            string lstOnlineUserId = String.Join(",", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
+            lstOnlineUserId = lstOnlineUserId + ",";
+            //string lstOnlineUserId = String.Join("#liReceiverUserId", users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId));
+            //List<int> lstOnlineUserId = users.Where(u => u.connectionIds.Count > 0 && u.UserId > 0).Select(s => s.UserId).ToList();
+            await Clients.Clients(lstConnectionId).SendAsync("ReceiveMessageOnlineUser", lstOnlineUserId);
 
             //return null;
         }
@@ -83,7 +87,7 @@ namespace NenoSlackAngular.Hubs
                 objChat.IsRead = true;
             else
                 objChat.IsRead = false;
-            IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId; 
+            IReadOnlyList<string> lstConnectionId = (IReadOnlyList<string>)readConId;
             try
             {
                 //HttpResponseMessage response = await client.PostAsync<ChatDetail>("api/ChatDetailAPI",objChat);
