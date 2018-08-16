@@ -30,22 +30,53 @@ namespace NenoSlackAngular.Controllers
         [HttpGet]
         public IEnumerable<OnlineUser> GetAllUser()
         {
-            //from c in categories
-            //join p in products on c equals p.Category into ps
-            //from p in ps.DefaultIfEmpty()
-
+            int UserId = 0;
+            if (HttpContext.Session.GetString("UseDetail") != null)
+            {
+                OnlineUser ou = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
+                UserId = ou.UserId;
+            }
             var dtl = (from u in _context.UserDetail
-                       from c in _context.ChatDetail.DefaultIfEmpty()
-                       //where c.IsRead == false
-                       group new { c.IsRead }
-                       by new { u.UserId, u.UserName, u.Img } into g
+                       join c in _context.ChatDetail on new { DID = (int?)u.UserId } equals new { DID = (int?)c.UserId } into dis
+                       from c in dis.DefaultIfEmpty()
+                           //where c.FromUserId == UserId
+                           //from c in _context.ChatDetail.DefaultIfEmpty()
+                           //where c.FromUserId == UserId// c.IsRead == false
                        select new OnlineUser
                        {
-                           UserId = g.Key.UserId,
-                           UserName = g.Key.UserName,
-                           Img = g.Key.Img,
-                           countUnread = g.Count(c => c.IsRead)
-                       }).ToList();
+                           UserId = u.UserId,
+                           UserName = u.UserName,
+                           Img = u.Img,
+                           countUnread = (c.IsRead == false && c.ToUserId == UserId) ? 1 : 0
+                       })
+                       .GroupBy(g => new { g.UserId, g.UserName, g.Img })
+                       .Select(u => new OnlineUser
+                       {
+                           UserId = u.Key.UserId,
+                           UserName = u.Key.UserName,
+                           Img = u.Key.Img,
+                           countUnread = u.Sum(o => o.countUnread)
+                       })
+                       .ToList();
+            //var dtl1 = (from u in _context.UserDetail
+            //           join c in _context.ChatDetail.DefaultIfEmpty() on u.UserId equals c.UserId
+            //           where c.IsRead == false// == null ? false : c.IsRead) == false
+            //           select new OnlineUser
+            //           {
+            //               UserId = u.UserId,
+            //               UserName = u.UserName,
+            //               Img = u.Img,
+            //               countUnread = 1
+            //           })
+            //           .GroupBy(g => new { g.UserId, g.UserName, g.Img })
+            //           .Select(u => new OnlineUser
+            //           {
+            //               UserId = u.Key.UserId,
+            //               UserName = u.Key.UserName,
+            //               Img = u.Key.Img,
+            //               countUnread = u.Sum(o => o.countUnread)
+            //           })
+            //           .ToList();
 
             //var j = (from u in _context.UserDetail
             //         join cj in _context.ChatDetail on u.UserId equals cj.UserId into gj

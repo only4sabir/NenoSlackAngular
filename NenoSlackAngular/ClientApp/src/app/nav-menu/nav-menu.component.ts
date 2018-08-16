@@ -30,9 +30,12 @@ export class NavMenuComponent {
       this.LoginUser = result;
       if (this.LoginUser != undefined) {
         this.signalrService.addUserIdInContextId(this.LoginUser.userId, this.LoginUser.userName, this.LoginUser.img);
+        //this.subscribeToEvents();
       }
     }, error => console.error(error));
     console.log('log' + this.users);
+
+    //this.subscribeToEvents();
   }
 
   //for message receiving in this
@@ -48,7 +51,10 @@ export class NavMenuComponent {
       }
     });
   }
-  collapse() {
+  collapse(UserId) {
+    if (UserId > 0) {
+      this.users.filter(s => s.userId == UserId).forEach(e => e.countUnread = 0);
+    }
     this.isExpanded = false;
   }
 

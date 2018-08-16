@@ -41,12 +41,16 @@ namespace NenoSlackAngular.Controllers
                 OnlineUser onlineUser = JsonConvert.DeserializeObject<OnlineUser>(HttpContext.Session.GetString("UseDetail"));
                 userid = onlineUser.UserId;
             }
+            //collect all unread chat
+            var lstChat = _context.ChatDetail.Where(s => s.FromUserId == receiverid && s.ToUserId == userid && s.IsRead == false).ToList();
+            lstChat.ForEach(f => f.IsRead = true);
 
+            //update unread chat to read
+            _context.ChatDetail.UpdateRange(lstChat);
+            _context.SaveChanges();
             var dtl = (from c in _context.ChatDetail
-                       join u in _context.UserDetail
-                       on c.FromUserId equals u.UserId
-                       join r in _context.UserDetail
-                       on c.ToUserId equals r.UserId
+                       join u in _context.UserDetail on c.FromUserId equals u.UserId
+                       join r in _context.UserDetail on c.ToUserId equals r.UserId
                        where (c.FromUserId == userid && c.ToUserId == receiverid) || (c.FromUserId == receiverid && c.ToUserId == userid)
                        orderby c.CreatedOn
                        select new vwChatDetail
@@ -58,7 +62,7 @@ namespace NenoSlackAngular.Controllers
                            IsRead = c.IsRead,
                            message = c.Message,
                            toUserId = c.ToUserId,
-                           img = c.FromUserId == userid ? u.Img : r.Img
+                           img = u.Img  //userid == c.FromUserId ? u.Img : r.Img
                        }).ToList();
             return dtl;
             // return _context.ChatDetail.Where(u => (u.FromUserId == userid && u.ToUserId == receiverid) || (u.FromUserId == receiverid && u.ToUserId == userid)).OrderBy(o => o.CreatedOn).ToList().Select(s => new vwChatDetail { chatId = s.ChatId, createdOn = s.CreatedOn.ToString("dd/MM HH:mm"), csscls = userid == s.FromUserId ? "sent" : "replies", fromUserId = s.FromUserId, IsRead = s.IsRead, message = s.Message, toUserId = s.ToUserId }).ToList<vwChatDetail>();
